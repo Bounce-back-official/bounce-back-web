@@ -1,0 +1,6 @@
+{%- if settings.bb_show_floating_line and settings.bb_line_url != blank -%}
+  <a class="bb-floating-line" href="{{ settings.bb_line_url }}" target="_blank" rel="noopener" aria-label="{{ settings.bb_line_label | escape }}">
+    <span class="bb-floating-line__dot" aria-hidden="true"></span>
+    <span>{{ settings.bb_line_label }}</span>
+  </a>
+{%- endif -%}

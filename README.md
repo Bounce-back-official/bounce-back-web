@@ -1,21 +1,82 @@
-# bounce-back-web — เว็บไซต์ขายของ (ไฮบริด)
+# Bounce Back E-commerce
 
-## แนวทาง
-- **Shopify** = ดูแลตะกร้า จ่ายเงิน สต๊อกหน้าร้าน (เปิดขายได้เร็ว ปลอดภัย)
-- **repo นี้** = เก็บโค้ดที่ custom เอง: ธีม + หน้า landing แคมเปญ
-- **LINE OA** = ปุ่ม/วิดเจ็ต "แอดไลน์" บนเว็บ ให้ลูกค้าคุยกับร้านโดยตรง
-- Deploy landing ฟรีผ่าน **GitHub Pages** (Settings → Pages → main → /landing)
+เว็บไซต์ E-commerce สำหรับแบรนด์เสื้อผ้าออกกำลังกาย **Bounce Back** พัฒนาบนสถาปัตยกรรม Shopify + GitHub โดยใช้โครงสร้าง Shopify Theme มาตรฐานสำหรับหน้าร้าน[1] และให้ Shopify ดูแลสินค้า สต็อก ตะกร้า คำสั่งซื้อ checkout และช่องทางชำระเงิน ส่วน repository นี้เก็บธีม หน้า campaign landing ระบบซิงก์ Google Sheets และคู่มือการตั้งค่า
 
-## โครงสร้าง
-- `landing/` — หน้า landing / แคมเปญ (static HTML) เผยแพร่ผ่าน GitHub Pages
-- `theme/`   — ไฟล์ธีม Shopify ที่ custom (Liquid/CSS)
+## Project structure
 
-## เชื่อม LINE OA (คุยกับลูกค้า)
-1. สมัคร **LINE Official Account** (เจ้าเดียวกับที่ใช้ทำบอทแจ้งเตือนใน bounce-back-ops)
-2. เอา **Basic ID** (เช่น @bounceback) มาทำลิงก์แอดเพื่อน: `https://line.me/R/ti/p/@basicid`
-3. ใส่ปุ่ม/วิดเจ็ตบนเว็บ (ตัวอย่างในไฟล์ landing/index.html มีจุดวางปุ่มไว้)
+| Path | Purpose |
+|---|---|
+| `theme/` | Shopify Online Store 2.0 theme ที่ปรับจาก Dawn ตาม CI ของ Bounce Back |
+| `landing/` | Static campaign/preview site สำหรับ GitHub Pages |
+| `integrations/shopify-sheets-sync/` | Webhook worker สำหรับซิงก์คำสั่งซื้อและสต็อกไป Google Sheets |
+| `docs/IMPLEMENTATION_SPEC.md` | UX, design system, information architecture และ data model |
+| `docs/SETUP_TH.md` | คู่มือตั้งค่าจริง Shopify, LINE OA, QR, Google Sheets และ webhooks |
+| `docs/VISUAL_QA_NOTES.md` | ผลตรวจ Responsive, Theme Check, tests และ Lighthouse |
 
-## เปิด landing บน GitHub Pages
-1. Settings → Pages → Source = `main`, โฟลเดอร์ `/landing`
-2. เว็บจะขึ้นที่ `https://bounce-back.github.io/bounce-back-web/`
-3. ผูกโดเมนจริงในช่อง Custom domain ได้ (มี HTTPS ฟรี)
+## Included storefront experience
+
+หน้าแรกประกอบด้วยสินค้าเปิดตัวใหม่ กิจกรรมของแบรนด์ หมวดเสื้อ กางเกง Accessories รีวิว และบทความความรู้ พร้อมหน้า product, cart, blog, search และ checkout flow ของ Shopify ธีมเพิ่มสต็อกคงเหลือบนหน้าสินค้า ปุ่ม LINE OA แบบลอย คำแนะนำ QR Payment ในตะกร้า หน้าแนะนำการดูแลสินค้า หน้าขอเปลี่ยนสินค้า และหน้าติดต่อเรา
+
+## Quick start
+
+### Preview landing locally
+
+```bash
+cd landing
+python3 -m http.server 4173
+```
+
+### Upload Shopify theme
+
+```bash
+shopify theme push --path theme
+```
+
+หรือบีบอัดไฟล์ภายใน `theme/` เป็น ZIP แล้วอัปโหลดผ่าน Shopify Admin
+
+### Test integration
+
+```bash
+cd integrations/shopify-sheets-sync
+pnpm install
+pnpm approve-builds --all
+pnpm check
+pnpm test
+```
+
+อ่านขั้นตอน deploy และ secrets ที่ `docs/SETUP_TH.md`
+
+## Required configuration before launch
+
+| Item | Current value |
+|---|---|
+| LINE OA URL | Placeholder `https://line.me/R/ti/p/@basicid` |
+| PromptPay QR | ต้องอัปโหลดรูปจริงใน Shopify Theme Editor |
+| Shopify store domain | ต้องตั้งค่าใน deployment secret |
+| Google Sheet ID | ต้องตั้งค่าใน deployment secret |
+| Existing Google Sheet template | ต้องตรวจ mapping ให้ตรงกับคอลัมน์จริง |
+| Product and campaign photography | ต้องอัปโหลดภาพสินค้าจริงใน Shopify |
+
+## Architecture decision
+
+Shopify เป็นระบบหลักของสต็อกและคำสั่งซื้อ Google Sheets เป็น operational mirror สำหรับงานบัญชีและ Telegram การซิงก์ใช้ `orders/paid` และ `inventory_levels/update` webhooks[2] พร้อม HMAC verification และ event deduplication ตามแนวทางการตรวจ webhook delivery ของ Shopify[4] ส่วนการบันทึกคำสั่งซื้อใหม่ใช้ความสามารถ append ของ Google Sheets API[3]
+
+## Quality status
+
+| Check | Result |
+|---|---|
+| Shopify Theme Check | 0 errors; 11 warnings inherited from Dawn |
+| Integration TypeScript | Passed |
+| Integration unit tests | 4/4 passed |
+| Landing HTML / JavaScript | Passed |
+| Lighthouse Performance | 90 |
+| Lighthouse Accessibility | 100 |
+| Lighthouse Best Practices | 100 |
+| Lighthouse SEO | 100 |
+
+## References
+
+[1]: https://shopify.dev/docs/storefronts/themes/architecture "Shopify Dev Docs — Theme architecture"
+[2]: https://shopify.dev/docs/api/admin-graphql/latest/objects/WebhookSubscription "Shopify GraphQL Admin API — WebhookSubscription"
+[3]: https://developers.google.com/workspace/sheets/api/reference/rest/v4/spreadsheets.values/append "Google Sheets API — spreadsheets.values.append"
+[4]: https://shopify.dev/docs/apps/build/webhooks/verify-deliveries "Shopify Dev Docs — Verify webhook deliveries"

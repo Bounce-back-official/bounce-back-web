@@ -1,0 +1,35 @@
+<section class="bb-section bb-categories color-{{ section.settings.color_scheme }}">
+  <div class="bb-shell">
+    <div class="bb-categories__head"><div><p class="bb-kicker">SHOP BY CATEGORY</p><h2>{{ section.settings.heading }}</h2></div></div>
+    <div class="bb-categories__grid">
+      {%- for block in section.blocks -%}
+        {%- assign target_collection = block.settings.collection -%}
+        <a class="bb-category" href="{{ target_collection.url | default: routes.all_products_collection_url }}" {{ block.shopify_attributes }}>
+          {%- if block.settings.image != blank -%}
+            {{ block.settings.image | image_url: width: 1100 | image_tag: class: 'bb-category__image', loading: 'lazy', widths: '500, 750, 1100', sizes: '(min-width: 990px) 33vw, 100vw' }}
+          {%- elsif target_collection.featured_image != blank -%}
+            {{ target_collection.featured_image | image_url: width: 1100 | image_tag: class: 'bb-category__image', loading: 'lazy', widths: '500, 750, 1100', sizes: '(min-width: 990px) 33vw, 100vw' }}
+          {%- endif -%}
+          <span class="bb-category__shade" aria-hidden="true"></span>
+          <span class="bb-category__content"><h3>{{ block.settings.title | default: target_collection.title }}</h3><span aria-hidden="true">↗</span></span>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name":"BB Categories",
+  "settings":[
+    {"type":"text","id":"heading","label":"หัวเรื่อง","default":"เลือกตามการเคลื่อนไหวของคุณ"},
+    {"type":"color_scheme","id":"color_scheme","label":"ชุดสี","default":"scheme-1"}
+  ],
+  "blocks":[{"type":"category","name":"หมวดสินค้า","settings":[
+    {"type":"text","id":"title","label":"ชื่อหมวด","default":"เสื้อ"},
+    {"type":"collection","id":"collection","label":"คอลเลกชัน"},
+    {"type":"image_picker","id":"image","label":"ภาพทดแทน"}
+  ]}],
+  "max_blocks":3,
+  "presets":[{"name":"BB Categories","blocks":[{"type":"category"},{"type":"category"},{"type":"category"}]}]
+}
+{% endschema %}

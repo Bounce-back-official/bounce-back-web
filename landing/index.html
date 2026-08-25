@@ -1,37 +1,155 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bounce Back — Men Sportswear</title>
-  <style>
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:#0E0F13;color:#F4F4F2;
-      min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px}
-    .wrap{max-width:640px}
-    .eyebrow{font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:#7C8CFF;font-weight:600}
-    h1{font-size:clamp(40px,9vw,84px);font-weight:800;letter-spacing:-.02em;line-height:.95;margin:16px 0}
-    p{color:#A6A9B2;font-size:18px;line-height:1.7;margin-bottom:28px}
-    .btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-    .cta{display:inline-block;text-decoration:none;font-weight:600;padding:15px 30px;border-radius:40px;font-size:16px}
-    .cta.primary{background:#2C43F0;color:#fff}
-    .cta.primary:hover{background:#4055ff}
-    .cta.line{background:#06C755;color:#fff}          /* LINE OA — ลูกค้าแอดคุยตรง */
-    .cta.line:hover{background:#05b34c}
-    .soon{margin-top:20px;font-size:13px;color:#5B5E66;letter-spacing:.1em}
-  </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0E0E10">
+  <meta name="description" content="Bounce Back — เสื้อผ้าออกกำลังกายสำหรับคนที่พร้อมกลับมาแข็งแกร่งกว่าเดิม">
+  <title>Bounce Back — Return Stronger</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/hero-athlete.webp" as="image" type="image/webp">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
 </head>
 <body>
-  <div class="wrap">
-    <div class="eyebrow">Men Sportswear</div>
-    <h1>BOUNCE BACK</h1>
-    <p>กลับมาแข็งแกร่งกว่าเดิม — เสื้อผ้ากีฬาผู้ชายที่ออกแบบมาเพื่อการเคลื่อนไหวจริง</p>
-    <div class="btns">
-      <a class="cta primary" href="#">เร็ว ๆ นี้</a>
-      <!-- แทนที่ @basicid ด้วย Basic ID ของ LINE OA จริง เช่น @bounceback -->
-      <a class="cta line" href="https://line.me/R/ti/p/@basicid" target="_blank" rel="noopener">แอดไลน์คุยกับร้าน</a>
+  <a class="skip-link" href="#main">ข้ามไปยังเนื้อหา</a>
+
+  <div class="announcement">ส่งฟรีเมื่อช้อปครบ 1,500 บาท <span aria-hidden="true">·</span> เปลี่ยนไซซ์ได้ภายใน 7 วัน</div>
+
+  <header class="site-header" data-header>
+    <a class="brand" href="#top" aria-label="Bounce Back หน้าแรก">
+      <svg class="brand__mark" viewBox="0 0 72 96" aria-hidden="true">
+        <path d="M8 4C35 13 53 25 59 38C63 47 58 53 45 56C57 60 64 68 62 78C59 89 38 94 8 92C27 82 38 71 38 61C38 53 30 48 15 46C31 39 38 31 35 23C32 16 23 10 8 4Z" fill="currentColor"/>
+      </svg>
+      <span>BOUNCE BACK</span>
+    </a>
+
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" data-menu-toggle>
+      <span></span><span></span><span></span><span class="sr-only">เปิดเมนู</span>
+    </button>
+
+    <nav class="primary-nav" id="primary-nav" aria-label="เมนูหลัก" data-menu>
+      <a href="#new">สินค้าใหม่</a>
+      <a href="#categories">หมวดสินค้า</a>
+      <a href="#activity">กิจกรรม</a>
+      <a href="#journal">บทความ</a>
+      <a href="#contact">ติดต่อเรา</a>
+    </nav>
+
+    <a class="header-action" href="https://line.me/R/ti/p/@basicid" target="_blank" rel="noopener">LINE OA ↗</a>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="hero__copy reveal">
+        <p class="eyebrow">RETURN ARC / COLLECTION 01</p>
+        <h1>NO MATTER HOW HARD YOU FALL, YOU CAN ALWAYS BOUNCE BACK.</h1>
+        <p class="hero__lead">เสื้อผ้าออกกำลังกายที่ออกแบบให้คุณกลับมาแข็งแกร่งกว่าเดิม ทุกการเคลื่อนไหว ทุกเป้าหมาย</p>
+        <div class="actions">
+          <a class="button button--light" href="#new">ช้อปสินค้าใหม่</a>
+          <a class="button button--ghost" href="#values">รู้จัก Bounce Back</a>
+        </div>
+      </div>
+      <div class="hero__visual reveal">
+        <img src="assets/hero-athlete.webp" alt="นักกีฬากำลังวิ่งในบรรยากาศมืด" width="1800" height="2700" fetchpriority="high">
+        <span class="hero__arc" aria-hidden="true"></span>
+        <span class="hero__label">RESILIENT · FOCUSED · READY</span>
+      </div>
+    </section>
+
+    <section class="values section" id="values">
+      <div class="section-head reveal">
+        <div><p class="eyebrow">WHAT WE STAND FOR</p><h2>สร้างมาเพื่อคนที่ล้มได้ และกลับมาได้เสมอ</h2></div>
+        <p>เสื้อผ้าที่เรียบพอดี ใช้งานจริง และพร้อมไปกับคุณในวันที่ต้องเริ่มอีกครั้ง</p>
+      </div>
+      <div class="value-grid">
+        <article class="value reveal"><span>01</span><h3>RESILIENT</h3><p>เด้งกลับ เรียนรู้ และแข็งแรงกว่าเดิม</p></article>
+        <article class="value reveal"><span>02</span><h3>FOCUS</h3><p>โฟกัสกับเป้าหมายและสิ่งที่สำคัญ</p></article>
+        <article class="value reveal"><span>03</span><h3>ADAPT</h3><p>ปรับตัวกับทุกจังหวะของชีวิต</p></article>
+        <article class="value reveal"><span>04</span><h3>MOVE FORWARD</h3><p>ก้าวต่อไปอย่างมั่นใจทุกวัน</p></article>
+      </div>
+    </section>
+
+    <section class="products section section--dark" id="new">
+      <div class="section-head section-head--light reveal">
+        <div><p class="eyebrow">NEW ARRIVALS</p><h2>พร้อมสำหรับการกลับมาครั้งต่อไป</h2></div>
+        <a class="text-link" href="https://line.me/R/ti/p/@basicid" target="_blank" rel="noopener">สอบถามสินค้าใน LINE ↗</a>
+      </div>
+      <div class="product-grid">
+        <article class="product-card reveal">
+          <div class="product-card__media product-card__media--one"><span class="product-card__badge">NEW</span><span class="product-card__mark">B</span></div>
+          <div class="product-card__info"><div><h3>RETURN ARC TRAINING TEE</h3><p>Obsidian / Sand</p></div><strong>฿890</strong></div>
+        </article>
+        <article class="product-card reveal">
+          <div class="product-card__media product-card__media--two"><span class="product-card__badge">LOW STOCK</span><span class="product-card__mark">B</span></div>
+          <div class="product-card__info"><div><h3>FOCUS 5” SHORTS</h3><p>Graphite</p></div><strong>฿1,090</strong></div>
+        </article>
+        <article class="product-card reveal">
+          <div class="product-card__media product-card__media--three"><span class="product-card__badge">NEW</span><span class="product-card__mark">B</span></div>
+          <div class="product-card__info"><div><h3>ADAPT DAILY JOGGER</h3><p>Charcoal</p></div><strong>฿1,490</strong></div>
+        </article>
+        <article class="product-card reveal">
+          <div class="product-card__media product-card__media--four"><span class="product-card__badge">ESSENTIAL</span><span class="product-card__mark">B</span></div>
+          <div class="product-card__info"><div><h3>MOVE CAP</h3><p>Obsidian</p></div><strong>฿690</strong></div>
+        </article>
+      </div>
+      <p class="demo-note">ภาพสินค้าเป็นพื้นที่ตัวอย่าง ระบบร้านค้าจริงจะแสดงภาพ ราคา ตัวเลือกไซซ์ และสต็อกจาก Shopify</p>
+    </section>
+
+    <section class="categories section" id="categories">
+      <div class="section-head reveal"><div><p class="eyebrow">SHOP BY CATEGORY</p><h2>เลือกตามการเคลื่อนไหวของคุณ</h2></div></div>
+      <div class="category-grid">
+        <a class="category category--shirt reveal" href="#new"><span>เสื้อ</span><b>↗</b></a>
+        <a class="category category--pants reveal" href="#new"><span>กางเกง</span><b>↗</b></a>
+        <a class="category category--accessories reveal" href="#new"><span>ACCESSORIES</span><b>↗</b></a>
+      </div>
+    </section>
+
+    <section class="activity section" id="activity">
+      <div class="activity__visual reveal" aria-hidden="true"><span>RETURN ARC</span></div>
+      <div class="activity__copy reveal">
+        <p class="eyebrow">BOUNCE BACK COMMUNITY</p>
+        <h2>RUN. RESET. RETURN.</h2>
+        <p class="activity__date">กิจกรรมวิ่งครั้งถัดไป · เร็ว ๆ นี้</p>
+        <p>มาร่วมขยับร่างกาย เรียนรู้การฟื้นตัว และกลับไปหาเป้าหมายพร้อมชุมชนที่ไม่ยอมแพ้</p>
+        <a class="button button--dark" href="https://line.me/R/ti/p/@basicid" target="_blank" rel="noopener">ติดตามกิจกรรมทาง LINE</a>
+      </div>
+    </section>
+
+    <section class="reviews section">
+      <div class="section-head reveal"><div><p class="eyebrow">REAL MOVEMENT. REAL PEOPLE.</p><h2>เสียงจากคนที่ไม่หยุดกลับมา</h2></div></div>
+      <div class="review-grid">
+        <figure class="review reveal"><div class="stars">★★★★★</div><blockquote>“ทรงพอดี เคลื่อนไหวง่าย และใส่ได้จริงทั้งวัน”</blockquote><figcaption>NAT · VERIFIED BUYER</figcaption></figure>
+        <figure class="review reveal"><div class="stars">★★★★★</div><blockquote>“เนื้อผ้าเบา แต่ดูมีโครง ใส่วิ่งและเข้ายิมได้โดยไม่ต้องเปลี่ยนลุค”</blockquote><figcaption>TON · VERIFIED BUYER</figcaption></figure>
+        <figure class="review reveal"><div class="stars">★★★★★</div><blockquote>“ชอบแนวคิดแบรนด์และรายละเอียดที่ไม่เยอะเกินไป ดูพรีเมียมมาก”</blockquote><figcaption>M · VERIFIED BUYER</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="journal section section--dark" id="journal">
+      <div class="section-head section-head--light reveal"><div><p class="eyebrow">MOVE BETTER JOURNAL</p><h2>ความรู้ที่ช่วยให้คุณกลับมาอย่างเข้าใจ</h2></div></div>
+      <div class="journal-grid">
+        <article class="journal-card reveal"><span>RECOVERY</span><h3>พักอย่างไรให้การกลับมาแข็งแรงกว่าเดิม</h3><a href="#contact">อ่านบทความ ↗</a></article>
+        <article class="journal-card reveal"><span>TRAINING</span><h3>เริ่มออกกำลังกายใหม่โดยไม่เร่งเกินไป</h3><a href="#contact">อ่านบทความ ↗</a></article>
+        <article class="journal-card reveal"><span>PRODUCT CARE</span><h3>ดูแลเสื้อผ้า Performance ให้ใช้งานได้นาน</h3><a href="#contact">อ่านบทความ ↗</a></article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="contact">
+    <div class="footer__top">
+      <div>
+        <a class="brand brand--footer" href="#top">
+          <svg class="brand__mark" viewBox="0 0 72 96" aria-hidden="true"><path d="M8 4C35 13 53 25 59 38C63 47 58 53 45 56C57 60 64 68 62 78C59 89 38 94 8 92C27 82 38 71 38 61C38 53 30 48 15 46C31 39 38 31 35 23C32 16 23 10 8 4Z" fill="currentColor"/></svg>
+          <span>BOUNCE BACK</span>
+        </a>
+        <p>กลับมาแข็งแกร่งกว่าเดิม</p>
+      </div>
+      <div><p class="footer__label">SUPPORT</p><a href="https://line.me/R/ti/p/@basicid" target="_blank" rel="noopener">LINE Official Account</a><a href="mailto:hello@bounceback.co.th">hello@bounceback.co.th</a></div>
+      <div><p class="footer__label">INFORMATION</p><a href="#values">เรื่องราวของเรา</a><a href="#journal">บทความ</a><a href="#contact">วิธีดูแลสินค้า</a><a href="#contact">ขอเปลี่ยนสินค้า</a></div>
     </div>
-    <div class="soon">COMING SOON · 2026</div>
-  </div>
+    <div class="footer__bottom"><span>© <span data-year></span> BOUNCE BACK</span><span>RESILIENT · FOCUSED · READY</span></div>
+  </footer>
+
+  <a class="line-float" href="https://line.me/R/ti/p/@basicid" target="_blank" rel="noopener" aria-label="เพิ่มเพื่อน LINE OA"><span></span><b>คุยกับทีมขายทาง LINE</b></a>
 </body>
 </html>

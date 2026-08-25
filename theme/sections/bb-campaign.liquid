@@ -1,0 +1,30 @@
+<section class="bb-section bb-campaign color-{{ section.settings.color_scheme }}">
+  <div class="bb-shell bb-campaign__layout">
+    <div class="bb-campaign__visual">
+      {%- if section.settings.image != blank -%}{{ section.settings.image | image_url: width: 1200 | image_tag: class: 'bb-category__image', loading: 'lazy', widths: '600, 900, 1200', sizes: '(min-width: 990px) 44vw, 100vw' }}{%- endif -%}
+    </div>
+    <div>
+      <p class="bb-kicker">{{ section.settings.kicker }}</p>
+      <h2>{{ section.settings.heading }}</h2>
+      <p class="bb-campaign__date">{{ section.settings.date_text }}</p>
+      <div class="bb-copy">{{ section.settings.text }}</div>
+      {%- if section.settings.link_label != blank -%}<a class="button" href="{{ section.settings.link }}">{{ section.settings.link_label }}</a>{%- endif -%}
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name":"BB Activity",
+  "settings":[
+    {"type":"text","id":"kicker","label":"ข้อความเหนือหัวเรื่อง","default":"BOUNCE BACK COMMUNITY"},
+    {"type":"text","id":"heading","label":"หัวเรื่อง","default":"RUN. RESET. RETURN."},
+    {"type":"text","id":"date_text","label":"วันและสถานที่","default":"กิจกรรมวิ่งครั้งถัดไป · เร็ว ๆ นี้"},
+    {"type":"richtext","id":"text","label":"รายละเอียด","default":"<p>มาร่วมขยับร่างกาย เรียนรู้การฟื้นตัว และกลับไปหาเป้าหมายพร้อมชุมชนที่ไม่ยอมแพ้</p>"},
+    {"type":"image_picker","id":"image","label":"ภาพกิจกรรม"},
+    {"type":"text","id":"link_label","label":"ข้อความปุ่ม","default":"ติดตามกิจกรรม"},
+    {"type":"url","id":"link","label":"ลิงก์"},
+    {"type":"color_scheme","id":"color_scheme","label":"ชุดสี","default":"scheme-4"}
+  ],
+  "presets":[{"name":"BB Activity"}]
+}
+{% endschema %}

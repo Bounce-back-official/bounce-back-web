@@ -1,0 +1,12 @@
+<section class="bb-page-hero color-scheme-1"><div class="bb-shell"><p class="bb-kicker">EXCHANGE REQUEST</p><h1>{{ section.settings.heading }}</h1><p class="bb-copy">{{ section.settings.intro }}</p></div></section>
+<section class="bb-content"><div class="bb-shell bb-content__narrow">
+  <div class="bb-steps">
+    <article class="bb-step"><span class="bb-step__number">01</span><div><h2>ตรวจสอบเงื่อนไข</h2><p>สินค้าต้องไม่ผ่านการซัก ไม่มีกลิ่น ครบป้ายและบรรจุภัณฑ์เดิม กรุณาติดต่อภายในระยะเวลาที่ร้านกำหนด</p></div></article>
+    <article class="bb-step"><span class="bb-step__number">02</span><div><h2>เตรียมเลขคำสั่งซื้อ</h2><p>แนบเลขคำสั่งซื้อ ชื่อสินค้า ไซซ์เดิม ไซซ์ที่ต้องการ และภาพสภาพสินค้า</p></div></article>
+    <article class="bb-step"><span class="bb-step__number">03</span><div><h2>ส่งคำขอผ่าน LINE</h2><p>ทีมงานจะตรวจสต็อกและแจ้งขั้นตอนส่งคืนให้ภายในเวลาทำการ</p>{%- if settings.bb_line_url != blank -%}<p><a class="button" href="{{ settings.bb_line_url }}" target="_blank" rel="noopener">เริ่มขอเปลี่ยนสินค้าทาง LINE</a></p>{%- endif -%}</div></article>
+  </div>
+  {%- if page.content != blank -%}<div class="rte">{{ page.content }}</div>{%- endif -%}
+</div></section>
+{% schema %}
+{"name":"BB Exchange","settings":[{"type":"text","id":"heading","label":"หัวเรื่อง","default":"เปลี่ยนไซซ์ให้มั่นใจ แล้วกลับไปเคลื่อนไหวต่อ"},{"type":"textarea","id":"intro","label":"คำอธิบาย","default":"ส่งข้อมูลให้ครบ ทีมงานจะช่วยตรวจสอบและประสานงานให้เร็วที่สุด"}],"presets":[{"name":"BB Exchange"}]}
+{% endschema %}
