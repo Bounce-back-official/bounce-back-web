@@ -1,0 +1,11 @@
+/** โลโก้มาร์คของ Bounce Back (รูปหยดน้ำ/การเด้งกลับ) — ใช้ currentColor */
+export function BrandMark({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 72 96" role="img" aria-hidden="true">
+      <path
+        d="M8 4C35 13 53 25 59 38C63 47 58 53 45 56C57 60 64 68 62 78C59 89 38 94 8 92C27 82 38 71 38 61C38 53 30 48 15 46C31 39 38 31 35 23C32 16 23 10 8 4Z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+}

@@ -1,0 +1,129 @@
+import Image from "next/image";
+import { notFound } from "next/navigation";
+
+import { AddToCart } from "@/components/AddToCart";
+import { formatBaht } from "@/lib/format";
+import { getProduct } from "@/lib/products";
+import { urlFor } from "@/sanity/lib/image";
+
+type Params = { slug: string };
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<Params>;
+}) {
+  const { slug } = await params;
+  const product = await getProduct(slug);
+  return { title: product?.title ?? "ไม่พบสินค้า" };
+}
+
+export default async function ProductPage({
+  params,
+}: {
+  params: Promise<Params>;
+}) {
+  const { slug } = await params;
+  const product = await getProduct(slug);
+  if (!product) notFound();
+
+  const displayImages: string[] =
+    product.imageUrls && product.imageUrls.length > 0
+      ? product.imageUrls
+      : (product.images ?? []).map((im) =>
+          urlFor(im).width(900).height(1125).fit("crop").url(),
+        );
+  const imageUrl = displayImages[0] ?? null;
+  const onSale =
+    product.compareAtPrice != null && product.compareAtPrice > product.price;
+
+  return (
+    <section className="section">
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+          gap: "48px",
+          alignItems: "start",
+        }}
+      >
+        {/* Gallery */}
+        <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+          <div
+            style={{ position: "relative", aspectRatio: "4/5", overflow: "hidden" }}
+            className="product-card__media"
+          >
+            {displayImages[0] ? (
+              <Image
+                src={displayImages[0]}
+                alt={product.title}
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                priority
+              />
+            ) : (
+              <span className="product-card__mark">B</span>
+            )}
+          </div>
+          {displayImages.length > 1 && (
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(4, 1fr)",
+                gap: "12px",
+              }}
+            >
+              {displayImages.slice(1, 5).map((img, i) => (
+                <div
+                  key={i}
+                  className="product-card__media"
+                  style={{ position: "relative", aspectRatio: "1", overflow: "hidden" }}
+                >
+                  <Image src={img} alt={`${product.title} ${i + 2}`} fill sizes="120px" />
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Info */}
+        <div>
+          {product.category && (
+            <p className="eyebrow" style={{ marginBottom: "12px" }}>
+              {product.category}
+            </p>
+          )}
+          <h1 style={{ fontSize: "clamp(30px, 4vw, 52px)", lineHeight: 1.05, letterSpacing: "-0.03em", margin: 0 }}>
+            {product.title}
+          </h1>
+
+          <div style={{ display: "flex", alignItems: "center", gap: "12px", margin: "18px 0 24px" }}>
+            <span style={{ fontFamily: "var(--font-montserrat), sans-serif", fontSize: "24px", fontWeight: 700 }}>
+              {formatBaht(product.price)}
+            </span>
+            {onSale && (
+              <span style={{ color: "rgba(14,14,16,.45)", textDecoration: "line-through" }}>
+                {formatBaht(product.compareAtPrice!)}
+              </span>
+            )}
+          </div>
+
+          {product.description && (
+            <p style={{ marginBottom: "28px", color: "rgba(14,14,16,.7)", lineHeight: 1.8, whiteSpace: "pre-line" }}>
+              {product.description}
+            </p>
+          )}
+
+          <AddToCart
+            productId={product._id}
+            slug={product.slug}
+            title={product.title}
+            price={product.price}
+            imageUrl={imageUrl}
+            variants={product.variants ?? []}
+          />
+        </div>
+      </div>
+    </section>
+  );
+}

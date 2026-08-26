@@ -1,0 +1,17 @@
+/** ค่าคงที่ของแบรนด์ — แก้ลิงก์/อีเมลจริงได้ที่นี่ที่เดียว */
+export const site = {
+  name: "BOUNCE BACK",
+  tagline: "กลับมาแข็งแกร่งกว่าเดิม",
+  lineUrl: "https://line.me/R/ti/p/@basicid", // TODO: เปลี่ยนเป็น LINE OA จริง
+  lineLabel: "คุยกับทีมขายทาง LINE",
+  email: "hello@bounceback.co.th",
+  freeShippingText: "ส่งฟรีเมื่อช้อปครบ 1,500 บาท",
+  exchangeText: "เปลี่ยนไซซ์ได้ภายใน 7 วัน",
+} as const;
+
+export const mainNav = [
+  { href: "/products", label: "สินค้าใหม่" },
+  { href: "/products?category=shirts", label: "เสื้อ" },
+  { href: "/products?category=pants", label: "กางเกง" },
+  { href: "/products?category=accessories", label: "อุปกรณ์" },
+] as const;
