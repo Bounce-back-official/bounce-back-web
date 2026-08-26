@@ -2,7 +2,7 @@
 export const site = {
   name: "BOUNCE BACK",
   tagline: "กลับมาแข็งแกร่งกว่าเดิม",
-  lineUrl: "https://line.me/R/ti/p/@basicid", // TODO: เปลี่ยนเป็น LINE OA จริง
+  lineUrl: "https://lin.ee/5fp1tLc", // LINE OA จริงของ Bounce Back
   lineLabel: "คุยกับทีมขายทาง LINE",
   email: "hello@bounceback.co.th",
   freeShippingText: "ส่งฟรีเมื่อช้อปครบ 1,500 บาท",
