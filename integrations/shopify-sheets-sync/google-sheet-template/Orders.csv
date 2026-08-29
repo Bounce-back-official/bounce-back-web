@@ -1,1 +1,0 @@
-﻿webhook_event_id,order_id,order_name,paid_at,created_at,currency,subtotal,discount_total,shipping_total,tax_total,order_total,financial_status,fulfillment_status,payment_gateway,customer_name,customer_email,customer_phone,shipping_province,note,source
