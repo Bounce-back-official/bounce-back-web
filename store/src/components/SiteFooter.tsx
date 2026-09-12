@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { site } from "@/lib/site";
-import { BrandMark } from "./BrandMark";
+import { Logo } from "./Logo";
 
 export function SiteFooter() {
   return (
@@ -9,8 +9,7 @@ export function SiteFooter() {
       <div className="footer__top">
         <div>
           <Link href="/" className="brand brand--footer">
-            <BrandMark className="brand__mark" />
-            <span>BOUNCE BACK</span>
+            <Logo height={52} variant="white" />
           </Link>
           <p>{site.tagline}</p>
         </div>

@@ -1,8 +1,8 @@
 import Link from "next/link";
 
 import { mainNav, site } from "@/lib/site";
-import { BrandMark } from "./BrandMark";
 import { CartButton } from "./CartButton";
+import { Logo } from "./Logo";
 
 export function SiteHeader() {
   return (
@@ -13,8 +13,7 @@ export function SiteHeader() {
       </div>
       <header className="site-header">
         <Link href="/" className="brand" aria-label="Bounce Back หน้าแรก">
-          <BrandMark className="brand__mark" />
-          <span>BOUNCE BACK</span>
+          <Logo height={46} variant="white" priority />
         </Link>
 
         <nav className="primary-nav" aria-label="เมนูหลัก">
