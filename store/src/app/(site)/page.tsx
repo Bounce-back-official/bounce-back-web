@@ -2,8 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { ProductCard } from "@/components/ProductCard";
-import { isDemoId } from "@/lib/demoProducts";
-import { getFeaturedProducts, getProducts } from "@/lib/products";
+import { getCategoryShowcase, getLatestProducts } from "@/lib/products";
 import { site } from "@/lib/site";
 
 const values = [
@@ -14,9 +13,9 @@ const values = [
 ];
 
 const categories = [
-  { label: "เสื้อ", href: "/products?category=shirts", cls: "" },
-  { label: "กางเกง", href: "/products?category=pants", cls: "category--pants" },
-  { label: "ACCESSORIES", href: "/products?category=accessories", cls: "category--accessories" },
+  { label: "เสื้อ", href: "/products?category=shirts", cls: "", key: "shirts" as const },
+  { label: "กางเกง", href: "/products?category=pants", cls: "category--pants", key: "pants" as const },
+  { label: "อุปกรณ์", href: "/products?category=accessories", cls: "category--accessories", key: "accessories" as const },
 ];
 
 const collectionNotes = [
@@ -26,25 +25,24 @@ const collectionNotes = [
 ];
 
 export default async function HomePage() {
-  const featured = await getFeaturedProducts();
-  const products = featured.length > 0 ? featured : await getProducts();
-  const isDemo = products.some((p) => isDemoId(p._id));
+  const [products, showcase] = await Promise.all([
+    getLatestProducts(4),
+    getCategoryShowcase(),
+  ]);
 
   return (
     <>
       {/* HERO */}
       <section className="hero" id="top">
         <div className="hero__copy">
-          <p className="eyebrow">RETURN ARC / COLLECTION 01</p>
           <p className="eyebrow">RESET. REBUILD. RETURN.</p>
-          <h1>หลังเลิกงาน ยังมีเวลาของเรา</h1>
+          <h1>Bounce Back Sport wear</h1>
           <p className="hero__lead">
-            เสื้อผ้ากีฬาและไลฟ์สไตล์สำหรับคนที่แบ่งเวลาให้ทั้งงาน ชีวิต
-            และการดูแลตัวเอง
+            เสื้อผ้ากีฬาและไลฟ์สไตล์ ให้เราได้ร่วมเป็นส่วนหนึ่งของการดูแลตัวเองของคุณ
           </p>
           <div className="actions">
             <Link className="button button--light" href="/products">
-              ดูคอลเลกชันแรก
+              ดูสินค้าทั้งหมด
             </Link>
             <a className="button button--ghost" href="#values">
               เรื่องของ Bounce Back
@@ -93,7 +91,7 @@ export default async function HomePage() {
         <div className="section-head section-head--light">
           <div>
             <p className="eyebrow">NEW ARRIVALS</p>
-            <h2>คอลเลกชันแรกของ Bounce Back</h2>
+            <h2>New Collection</h2>
           </div>
           <Link className="text-link" href="/products">
             ดูสินค้าทั้งหมด ↗
@@ -101,19 +99,10 @@ export default async function HomePage() {
         </div>
 
         <div className="product-grid">
-          {products.slice(0, 3).map((product) => (
+          {products.slice(0, 4).map((product) => (
             <ProductCard key={product._id} product={product} />
           ))}
         </div>
-        {isDemo && (
-          <p className="demo-note">
-            สินค้าด้านบนเป็นตัวอย่าง — เพิ่มสินค้าจริง (ภาพ ราคา ไซซ์ สต็อก) ได้ที่{" "}
-            <Link href="/studio" style={{ textDecoration: "underline" }}>
-              /studio
-            </Link>{" "}
-            แล้วระบบจะสลับมาแสดงของจริงอัตโนมัติ
-          </p>
-        )}
       </section>
 
       {/* CATEGORIES */}
@@ -125,12 +114,25 @@ export default async function HomePage() {
           </div>
         </div>
         <div className="category-grid">
-          {categories.map((c) => (
-            <Link className={`category ${c.cls}`} href={c.href} key={c.label}>
-              <span>{c.label}</span>
-              <b>↗</b>
-            </Link>
-          ))}
+          {categories.map((c) => {
+            const img = showcase[c.key];
+            return (
+              <Link className={`category ${c.cls}`} href={c.href} key={c.label}>
+                {img && (
+                  <Image
+                    className="category__img"
+                    src={img}
+                    alt={c.label}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                  />
+                )}
+                <i className="category__overlay" aria-hidden="true" />
+                <span>{c.label}</span>
+                <b>↗</b>
+              </Link>
+            );
+          })}
         </div>
       </section>
 

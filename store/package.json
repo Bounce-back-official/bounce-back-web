@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "seed": "node scripts/seed-sanity.mjs"
+    "seed": "node scripts/seed-sanity.mjs",
+    "seed:articles": "tsx scripts/seed-articles.ts"
   },
   "dependencies": {
     "@sanity/image-url": "^2.1.1",

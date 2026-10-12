@@ -2,7 +2,15 @@ import type { SanityImageSource } from "@sanity/image-url";
 
 import { isSanityConfigured } from "@/sanity/env";
 import { client } from "@/sanity/lib/client";
+import { urlFor } from "@/sanity/lib/image";
 import { demoProducts } from "./demoProducts";
+
+/** map slug ในเมนู/URL → ชื่อหมวดใน Sanity (ใช้กรองสินค้าตามหมวด) */
+export const CATEGORY_SLUG_TO_TITLE: Record<string, string> = {
+  shirts: "เสื้อ",
+  pants: "กางเกง",
+  accessories: "อุปกรณ์",
+};
 
 export type ProductVariant = {
   size?: string;
@@ -60,26 +68,53 @@ const detailFields = `
   featured
 `;
 
-export async function getProducts(): Promise<Product[]> {
-  if (!isSanityConfigured) return demoProducts;
-  const results: Product[] = await client.fetch(
-    `*[_type == "product" && active == true]|order(featured desc, _createdAt desc){${listFields}}`,
-    {},
+/** ดึงสินค้า — ใส่ categorySlug (shirts/pants/accessories) เพื่อกรองเฉพาะหมวด */
+export async function getProducts(categorySlug?: string): Promise<Product[]> {
+  if (!isSanityConfigured) return [];
+  const title = categorySlug ? CATEGORY_SLUG_TO_TITLE[categorySlug] : undefined;
+  const filter = title ? ` && category->title == $title` : "";
+  return client.fetch(
+    `*[_type == "product" && active == true${filter}]|order(featured desc, _createdAt desc){${listFields}}`,
+    title ? { title } : {},
     { next: { revalidate: 60 } },
   );
-  // ยังไม่มีสินค้าจริง → ใช้สินค้าตัวอย่าง
-  return [...results, ...demoProducts.filter((p) => !results.some((real) => real.slug === p.slug))];
 }
 
-export async function getFeaturedProducts(): Promise<Product[]> {
-  const demoFeatured = demoProducts.filter((p) => p.featured);
-  if (!isSanityConfigured) return demoFeatured;
-  const results: Product[] = await client.fetch(
-    `*[_type == "product" && active == true && featured == true]|order(_createdAt desc)[0...8]{${listFields}}`,
+/** สินค้าที่เพิ่มล่าสุด — ใช้โชว์ "New Collection" หน้าแรก */
+export async function getLatestProducts(limit = 4): Promise<Product[]> {
+  if (!isSanityConfigured) return [];
+  return client.fetch(
+    `*[_type == "product" && active == true]|order(_createdAt desc)[0...${limit}]{${listFields}}`,
     {},
     { next: { revalidate: 60 } },
   );
-  return results.length > 0 ? results : demoFeatured;
+}
+
+/** รูปตัวแทน 1 รูปต่อหมวด — ใช้ในการ์ด "เลือกประเภทสินค้า" หน้าแรก */
+export async function getCategoryShowcase(): Promise<{
+  shirts: string | null;
+  pants: string | null;
+  accessories: string | null;
+}> {
+  const empty = { shirts: null, pants: null, accessories: null };
+  if (!isSanityConfigured) return empty;
+  const q = `{
+    "shirts": *[_type=="product" && active==true && category->title=="เสื้อ" && count(images)>0]|order(featured desc, _createdAt desc)[0].images[0],
+    "pants": *[_type=="product" && active==true && category->title=="กางเกง" && count(images)>0]|order(featured desc, _createdAt desc)[0].images[0],
+    "accessories": *[_type=="product" && active==true && category->title=="อุปกรณ์" && count(images)>0]|order(featured desc, _createdAt desc)[0].images[0]
+  }`;
+  const res = await client.fetch<{
+    shirts: SanityImageSource | null;
+    pants: SanityImageSource | null;
+    accessories: SanityImageSource | null;
+  }>(q, {}, { next: { revalidate: 60 } });
+  const toUrl = (img: SanityImageSource | null) =>
+    img ? urlFor(img).width(800).height(1000).fit("crop").url() : null;
+  return {
+    shirts: toUrl(res.shirts),
+    pants: toUrl(res.pants),
+    accessories: toUrl(res.accessories),
+  };
 }
 
 export async function getProduct(slug: string): Promise<Product | null> {

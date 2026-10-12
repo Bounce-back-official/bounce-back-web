@@ -1,14 +1,7 @@
 import { ProductCard } from "@/components/ProductCard";
-import { isDemoId } from "@/lib/demoProducts";
-import { getProducts } from "@/lib/products";
+import { CATEGORY_SLUG_TO_TITLE, getProducts } from "@/lib/products";
 
 export const metadata = { title: "สินค้าทั้งหมด" };
-
-const categoryLabels: Record<string, string> = {
-  shirts: "เสื้อ",
-  pants: "กางเกง",
-  accessories: "อุปกรณ์",
-};
 
 export default async function ProductsPage({
   searchParams,
@@ -16,31 +9,28 @@ export default async function ProductsPage({
   searchParams: Promise<{ category?: string | string[] }>;
 }) {
   const { category } = await searchParams;
-  const selected = typeof category === "string" ? categoryLabels[category] : undefined;
-  const allProducts = await getProducts();
-  const products = selected ? allProducts.filter((p) => p.category === selected) : allProducts;
-  const isDemo = products.some((p) => isDemoId(p._id));
+  const slug = typeof category === "string" ? category : undefined;
+  const selected = slug ? CATEGORY_SLUG_TO_TITLE[slug] : undefined;
+  const products = await getProducts(slug);
 
   return (
     <section className="section">
       <div className="section-head">
         <div>
-          <p className="eyebrow">ALL PRODUCTS</p>
+          <p className="eyebrow">{selected ? "CATEGORY" : "ALL PRODUCTS"}</p>
           <h2>{selected ?? "สินค้าทั้งหมด"}</h2>
           <p className="meta">{products.length} แบบ</p>
         </div>
       </div>
 
-      <div className="product-grid">
-        {products.map((product) => (
-          <ProductCard key={product._id} product={product} />
-        ))}
-      </div>
-
-      {isDemo && (
-        <p className="demo-note" style={{ color: "rgba(14,14,16,.55)" }}>
-          รายการที่มีป้าย MOCKUP เป็นแบบจำลองสินค้า ราคาเป็นตัวอย่าง ยังไม่เปิดจำหน่าย
-        </p>
+      {products.length === 0 ? (
+        <p style={{ color: "rgba(14,14,16,.55)" }}>ยังไม่มีสินค้าในหมวดนี้</p>
+      ) : (
+        <div className="product-grid">
+          {products.map((product) => (
+            <ProductCard key={product._id} product={product} />
+          ))}
+        </div>
       )}
     </section>
   );

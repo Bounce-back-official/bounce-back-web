@@ -11,7 +11,8 @@ export const site = {
 } as const;
 
 export const mainNav = [
-  { href: "/products", label: "สินค้าใหม่" },
+  { href: "/", label: "หน้าแรก" },
+  { href: "/products", label: "สินค้าทั้งหมด" },
   { href: "/products?category=shirts", label: "เสื้อ" },
   { href: "/products?category=pants", label: "กางเกง" },
   { href: "/products?category=accessories", label: "อุปกรณ์" },
