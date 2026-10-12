@@ -14,8 +14,14 @@ export type Article = {
   coverImage?: SanityImageSource;
   coverImageUrl?: string; // ใช้กับบทความตัวอย่าง (รูป local)
   body?: PortableTextBlock[];
+  faq?: FaqItem[];
   publishedAt?: string;
   featured?: boolean;
+};
+
+export type FaqItem = {
+  question: string;
+  answer: string;
 };
 
 /** ป้ายหมวดหมู่ภาษาไทย */
@@ -44,6 +50,7 @@ const detailFields = `
   excerpt,
   coverImage,
   body,
+  faq,
   publishedAt,
   featured
 `;

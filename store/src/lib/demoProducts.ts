@@ -88,6 +88,15 @@ export const demoProducts: Product[] = [
       { size: "XL", color: "Light Grey", sku: "HLF-GR-XL", stock: 0 },
     ],
   },
+  { _id: "demo-mockup-reset-tee", title: "RESET TEE", slug: "reset-tee", price: 690, category: "เสื้อ", featured: false, mockup: true, imageUrls: ["/products/mockups/reset-tee.svg"], description: "แบบจำลองสำหรับดูแนวทางสินค้า ราคาเป็นตัวอย่าง ยังไม่เปิดจำหน่าย", variants: [] },
+  { _id: "demo-mockup-rebuild-tank", title: "REBUILD TANK", slug: "rebuild-tank", price: 690, category: "เสื้อ", featured: false, mockup: true, imageUrls: ["/products/mockups/rebuild-tank.svg"], description: "แบบจำลองสำหรับดูแนวทางสินค้า ราคาเป็นตัวอย่าง ยังไม่เปิดจำหน่าย", variants: [] },
+  { _id: "demo-mockup-return-long-sleeve", title: "RETURN LONG SLEEVE", slug: "return-long-sleeve", price: 690, category: "เสื้อ", featured: false, mockup: true, imageUrls: ["/products/mockups/return-long-sleeve.svg"], description: "แบบจำลองสำหรับดูแนวทางสินค้า ราคาเป็นตัวอย่าง ยังไม่เปิดจำหน่าย", variants: [] },
+  { _id: "demo-mockup-reset-jogger", title: "RESET JOGGER", slug: "reset-jogger", price: 890, category: "กางเกง", featured: false, mockup: true, imageUrls: ["/products/mockups/reset-jogger.svg"], description: "แบบจำลองสำหรับดูแนวทางสินค้า ราคาเป็นตัวอย่าง ยังไม่เปิดจำหน่าย", variants: [] },
+  { _id: "demo-mockup-rebuild-shorts", title: "REBUILD SHORTS", slug: "rebuild-shorts", price: 890, category: "กางเกง", featured: false, mockup: true, imageUrls: ["/products/mockups/rebuild-shorts.svg"], description: "แบบจำลองสำหรับดูแนวทางสินค้า ราคาเป็นตัวอย่าง ยังไม่เปิดจำหน่าย", variants: [] },
+  { _id: "demo-mockup-return-track-pants", title: "RETURN TRACK PANTS", slug: "return-track-pants", price: 890, category: "กางเกง", featured: false, mockup: true, imageUrls: ["/products/mockups/return-track-pants.svg"], description: "แบบจำลองสำหรับดูแนวทางสินค้า ราคาเป็นตัวอย่าง ยังไม่เปิดจำหน่าย", variants: [] },
+  { _id: "demo-mockup-reset-towel", title: "RESET TOWEL", slug: "reset-towel", price: 290, category: "อุปกรณ์", featured: false, mockup: true, imageUrls: ["/products/mockups/reset-towel.svg"], description: "แบบจำลองสำหรับดูแนวทางสินค้า ราคาเป็นตัวอย่าง ยังไม่เปิดจำหน่าย", variants: [] },
+  { _id: "demo-mockup-rebuild-headband", title: "REBUILD HEADBAND", slug: "rebuild-headband", price: 290, category: "อุปกรณ์", featured: false, mockup: true, imageUrls: ["/products/mockups/rebuild-headband.svg"], description: "แบบจำลองสำหรับดูแนวทางสินค้า ราคาเป็นตัวอย่าง ยังไม่เปิดจำหน่าย", variants: [] },
+  { _id: "demo-mockup-return-wristbands", title: "RETURN WRISTBANDS", slug: "return-wristbands", price: 290, category: "อุปกรณ์", featured: false, mockup: true, imageUrls: ["/products/mockups/return-wristbands.svg"], description: "แบบจำลองสำหรับดูแนวทางสินค้า ราคาเป็นตัวอย่าง ยังไม่เปิดจำหน่าย", variants: [] },
 ];
 
 export function isDemoId(id: string): boolean {

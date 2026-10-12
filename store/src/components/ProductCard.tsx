@@ -21,7 +21,9 @@ export function ProductCard({ product }: { product: Product }) {
   const lowStock =
     totalStock != null && totalStock > 0 && totalStock <= 5;
 
-  const badge = onSale
+  const badge = product.mockup
+    ? "MOCKUP"
+    : onSale
     ? "SALE"
     : lowStock
       ? "LOW STOCK"

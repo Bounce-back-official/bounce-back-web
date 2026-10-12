@@ -67,6 +67,25 @@ export const articleType = defineType({
       ],
     }),
     defineField({
+      name: "faq",
+      title: "คำถามที่พบบ่อย (FAQ) — ช่วยเรื่อง SEO",
+      description: "ใส่ 3 ข้อกำลังดี จะแสดงท้ายบทความ และช่วยให้ขึ้น Google แบบมีคำถาม-คำตอบ",
+      type: "array",
+      of: [
+        defineArrayMember({
+          type: "object",
+          name: "faqItem",
+          fields: [
+            defineField({ name: "question", title: "คำถาม", type: "string" }),
+            defineField({ name: "answer", title: "คำตอบ", type: "text", rows: 3 }),
+          ],
+          preview: {
+            select: { title: "question", subtitle: "answer" },
+          },
+        }),
+      ],
+    }),
+    defineField({
       name: "publishedAt",
       title: "วันที่เผยแพร่",
       type: "datetime",

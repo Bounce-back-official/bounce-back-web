@@ -136,6 +136,9 @@ export default async function ProductPage({
             </details>
           )}
 
+          {product.mockup ? (
+            <p className="meta">แบบจำลองสินค้า · ยังไม่เปิดจำหน่าย</p>
+          ) : (
           <AddToCart
             productId={product._id}
             slug={product.slug}
@@ -144,6 +147,7 @@ export default async function ProductPage({
             imageUrl={imageUrl}
             variants={product.variants ?? []}
           />
+          )}
         </div>
       </div>
     </section>

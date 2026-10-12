@@ -32,6 +32,7 @@ export type Product = {
   variants?: ProductVariant[];
   sizeChart?: SizeRow[];
   featured?: boolean;
+  mockup?: boolean;
 };
 
 const listFields = `
@@ -67,7 +68,7 @@ export async function getProducts(): Promise<Product[]> {
     { next: { revalidate: 60 } },
   );
   // ยังไม่มีสินค้าจริง → ใช้สินค้าตัวอย่าง
-  return results.length > 0 ? results : demoProducts;
+  return [...results, ...demoProducts.filter((p) => !results.some((real) => real.slug === p.slug))];
 }
 
 export async function getFeaturedProducts(): Promise<Product[]> {

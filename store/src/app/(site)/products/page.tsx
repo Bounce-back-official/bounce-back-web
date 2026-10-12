@@ -4,8 +4,21 @@ import { getProducts } from "@/lib/products";
 
 export const metadata = { title: "สินค้าทั้งหมด" };
 
-export default async function ProductsPage() {
-  const products = await getProducts();
+const categoryLabels: Record<string, string> = {
+  shirts: "เสื้อ",
+  pants: "กางเกง",
+  accessories: "อุปกรณ์",
+};
+
+export default async function ProductsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ category?: string | string[] }>;
+}) {
+  const { category } = await searchParams;
+  const selected = typeof category === "string" ? categoryLabels[category] : undefined;
+  const allProducts = await getProducts();
+  const products = selected ? allProducts.filter((p) => p.category === selected) : allProducts;
   const isDemo = products.some((p) => isDemoId(p._id));
 
   return (
@@ -13,7 +26,8 @@ export default async function ProductsPage() {
       <div className="section-head">
         <div>
           <p className="eyebrow">ALL PRODUCTS</p>
-          <h2>สินค้าทั้งหมด</h2>
+          <h2>{selected ?? "สินค้าทั้งหมด"}</h2>
+          <p className="meta">{products.length} แบบ</p>
         </div>
       </div>
 
@@ -25,7 +39,7 @@ export default async function ProductsPage() {
 
       {isDemo && (
         <p className="demo-note" style={{ color: "rgba(14,14,16,.55)" }}>
-          สินค้าเหล่านี้เป็นตัวอย่าง — เพิ่มสินค้าจริงได้ที่ /studio แล้วจะแสดงของจริงแทน
+          รายการที่มีป้าย MOCKUP เป็นแบบจำลองสินค้า ราคาเป็นตัวอย่าง ยังไม่เปิดจำหน่าย
         </p>
       )}
     </section>

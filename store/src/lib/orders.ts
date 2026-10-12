@@ -55,6 +55,10 @@ export async function buildOrderDraft(
       errors.push(`ไม่พบสินค้า (${item.productId})`);
       continue;
     }
+    if (p.mockup) {
+      errors.push(`${p.title} เป็นแบบจำลอง ยังไม่เปิดจำหน่าย`);
+      continue;
+    }
     const qty = Math.max(1, Math.floor(item.qty));
 
     let sku: string | undefined;
