@@ -32,7 +32,7 @@ export function SiteFooter() {
       </div>
       <div className="footer__bottom">
         <span>© {new Date().getFullYear()} BOUNCE BACK</span>
-        <span>RESILIENT · FOCUSED · READY</span>
+        <span>FALL. RISE. REPEAT.</span>
       </div>
     </footer>
   );

@@ -19,11 +19,11 @@ const notoThai = Noto_Sans_Thai({
 
 export const metadata: Metadata = {
   title: {
-    default: "Bounce Back — Return Stronger",
+    default: "Bounce Back — Reset. Rebuild. Return.",
     template: "%s | Bounce Back",
   },
   description:
-    "Bounce Back — เสื้อผ้าออกกำลังกายสำหรับคนที่พร้อมกลับมาแข็งแกร่งกว่าเดิม รองรับชำระเงินผ่าน QR PromptPay และบัตรเครดิต",
+    "Bounce Back — เสื้อผ้ากีฬาและไลฟ์สไตล์สำหรับคนที่แบ่งเวลาให้ทั้งงาน ชีวิต และการดูแลตัวเอง พบกับคอลเลกชันแรกของเรา",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

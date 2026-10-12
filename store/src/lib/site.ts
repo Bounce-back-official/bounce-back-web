@@ -1,7 +1,7 @@
 /** ค่าคงที่ของแบรนด์ — แก้ลิงก์/อีเมลจริงได้ที่นี่ที่เดียว */
 export const site = {
   name: "BOUNCE BACK",
-  tagline: "กลับมาแข็งแกร่งกว่าเดิม",
+  tagline: "กลับมา ในจังหวะของคุณ",
   lineUrl: "https://lin.ee/5fp1tLc", // LINE OA จริงของ Bounce Back
   lineLabel: "คุยกับทีมขายทาง LINE",
   email: "hello@bounceback.co.th",
@@ -14,4 +14,5 @@ export const mainNav = [
   { href: "/products?category=shirts", label: "เสื้อ" },
   { href: "/products?category=pants", label: "กางเกง" },
   { href: "/products?category=accessories", label: "อุปกรณ์" },
+  { href: "/knowledge", label: "เกร็ดความรู้" },
 ] as const;

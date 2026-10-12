@@ -7,10 +7,10 @@ import { getFeaturedProducts, getProducts } from "@/lib/products";
 import { site } from "@/lib/site";
 
 const values = [
-  { n: "01", t: "RESILIENT", d: "เด้งกลับ เรียนรู้ และแข็งแรงกว่าเดิม" },
-  { n: "02", t: "FOCUS", d: "โฟกัสกับเป้าหมายและสิ่งที่สำคัญ" },
-  { n: "03", t: "ADAPT", d: "ปรับตัวกับทุกจังหวะของชีวิต" },
-  { n: "04", t: "MOVE FORWARD", d: "ก้าวต่อไปอย่างมั่นใจทุกวัน" },
+  { n: "01", t: "RESET", d: "พัก ตั้งหลัก แล้วค่อยเริ่มใหม่" },
+  { n: "02", t: "REBUILD", d: "สร้างกิจวัตรที่เข้ากับชีวิตตอนนี้" },
+  { n: "03", t: "RETURN", d: "กลับมาทำสิ่งที่อยากทำอีกครั้ง" },
+  { n: "04", t: "EVERYDAY ATHLETIC", d: "ให้การขยับเป็นส่วนหนึ่งของวัน" },
 ];
 
 const categories = [
@@ -19,10 +19,10 @@ const categories = [
   { label: "ACCESSORIES", href: "/products?category=accessories", cls: "category--accessories" },
 ];
 
-const reviews = [
-  { q: "ทรงพอดี เคลื่อนไหวง่าย และใส่ได้จริงทั้งวัน", who: "NAT · VERIFIED BUYER" },
-  { q: "เนื้อผ้าเบา แต่ดูมีโครง ใส่วิ่งและเข้ายิมได้โดยไม่ต้องเปลี่ยนลุค", who: "TON · VERIFIED BUYER" },
-  { q: "ชอบแนวคิดแบรนด์และรายละเอียดที่ไม่เยอะเกินไป ดูพรีเมียมมาก", who: "M · VERIFIED BUYER" },
+const collectionNotes = [
+  { title: "RETURN ARC", description: "คอลเลกชันแรกของ Bounce Back กับแนวคิด Reset / Rebuild / Return" },
+  { title: "ดีไซน์ในคอลเลกชัน", description: "ดูกราฟิกและรายละเอียดของแต่ละรุ่นได้จากภาพในหน้าสินค้า" },
+  { title: "เลือกไซซ์ของคุณ", description: "เทียบขนาดเสื้อกับตารางไซซ์ก่อนเลือก หากไม่แน่ใจ คุยกับเราทาง LINE ได้" },
 ];
 
 export default async function HomePage() {
@@ -36,17 +36,18 @@ export default async function HomePage() {
       <section className="hero" id="top">
         <div className="hero__copy">
           <p className="eyebrow">RETURN ARC / COLLECTION 01</p>
-          <h1>NO MATTER HOW HARD YOU FALL, YOU CAN ALWAYS BOUNCE BACK.</h1>
+          <p className="eyebrow">RESET. REBUILD. RETURN.</p>
+          <h1>หลังเลิกงาน ยังมีเวลาของเรา</h1>
           <p className="hero__lead">
-            เสื้อผ้าออกกำลังกายที่ออกแบบให้คุณกลับมาแข็งแกร่งกว่าเดิม
-            ทุกการเคลื่อนไหว ทุกเป้าหมาย
+            เสื้อผ้ากีฬาและไลฟ์สไตล์สำหรับคนที่แบ่งเวลาให้ทั้งงาน ชีวิต
+            และการดูแลตัวเอง
           </p>
           <div className="actions">
             <Link className="button button--light" href="/products">
-              ช้อปสินค้าใหม่
+              ดูคอลเลกชันแรก
             </Link>
             <a className="button button--ghost" href="#values">
-              รู้จัก Bounce Back
+              เรื่องของ Bounce Back
             </a>
           </div>
         </div>
@@ -59,7 +60,7 @@ export default async function HomePage() {
             priority
           />
           <span className="hero__arc" aria-hidden="true" />
-          <span className="hero__label">RESILIENT · FOCUSED · READY</span>
+          <span className="hero__label">RESET · REBUILD · RETURN</span>
         </div>
       </section>
 
@@ -68,11 +69,12 @@ export default async function HomePage() {
         <div className="section-head">
           <div>
             <p className="eyebrow">WHAT WE STAND FOR</p>
-            <h2>สร้างมาเพื่อคนที่ล้มได้ และกลับมาได้เสมอ</h2>
+            <h2>ชีวิตไม่ได้มีแค่เวลาซ้อม</h2>
           </div>
           <p>
-            เสื้อผ้าที่เรียบพอดี ใช้งานจริง
-            และพร้อมไปกับคุณในวันที่ต้องเริ่มอีกครั้ง
+            มีงานที่ต้องทำ มีคนที่ต้องดูแล และมีวันที่ตารางไม่เป็นใจ
+            Bounce Back เชื่อว่าการดูแลตัวเองมีที่อยู่ในชีวิตแบบนี้ได้
+            จะเป็นการซ้อมเต็มชั่วโมง หรือเดินสั้น ๆ หลังเลิกงาน
           </p>
         </div>
         <div className="value-grid">
@@ -91,7 +93,7 @@ export default async function HomePage() {
         <div className="section-head section-head--light">
           <div>
             <p className="eyebrow">NEW ARRIVALS</p>
-            <h2>พร้อมสำหรับการกลับมาครั้งต่อไป</h2>
+            <h2>คอลเลกชันแรกของ Bounce Back</h2>
           </div>
           <Link className="text-link" href="/products">
             ดูสินค้าทั้งหมด ↗
@@ -119,7 +121,7 @@ export default async function HomePage() {
         <div className="section-head section-head--light">
           <div>
             <p className="eyebrow">SHOP BY CATEGORY</p>
-            <h2>เลือกตามการเคลื่อนไหวของคุณ</h2>
+            <h2>เลือกประเภทสินค้า</h2>
           </div>
         </div>
         <div className="category-grid">
@@ -138,12 +140,11 @@ export default async function HomePage() {
           <span>RETURN ARC</span>
         </div>
         <div className="activity__copy">
-          <p className="eyebrow">BOUNCE BACK COMMUNITY</p>
-          <h2>RUN. RESET. RETURN.</h2>
-          <p className="activity__date">กิจกรรมวิ่งครั้งถัดไป · เร็ว ๆ นี้</p>
+          <p className="eyebrow">STAY IN TOUCH</p>
+          <h2>ติดตามก้าวต่อไปของ Bounce Back</h2>
           <p>
-            มาร่วมขยับร่างกาย เรียนรู้การฟื้นตัว
-            และกลับไปหาเป้าหมายพร้อมชุมชนที่ไม่ยอมแพ้
+            ข่าวคอลเลกชันใหม่ วันเปิดขาย และเบื้องหลังแบรนด์
+            อยู่ที่ LINE ของเรา
           </p>
           <a
             className="button button--dark"
@@ -151,26 +152,25 @@ export default async function HomePage() {
             target="_blank"
             rel="noopener"
           >
-            ติดตามกิจกรรมทาง LINE
+            เพิ่มเพื่อนทาง LINE
           </a>
         </div>
       </section>
 
-      {/* REVIEWS */}
+      {/* COLLECTION NOTES — replace with real stories when available */}
       <section className="section reviews">
         <div className="section-head">
           <div>
-            <p className="eyebrow">REAL MOVEMENT. REAL PEOPLE.</p>
-            <h2>เสียงจากคนที่ไม่หยุดกลับมา</h2>
+            <p className="eyebrow">COLLECTION NOTES</p>
+            <h2>รู้จักคอลเลกชันแรก</h2>
           </div>
         </div>
         <div className="review-grid">
-          {reviews.map((r) => (
-            <figure className="review" key={r.who}>
-              <div className="stars">★★★★★</div>
-              <blockquote>“{r.q}”</blockquote>
-              <figcaption>{r.who}</figcaption>
-            </figure>
+          {collectionNotes.map((note) => (
+            <article className="review" key={note.title}>
+              <h3>{note.title}</h3>
+              <p>{note.description}</p>
+            </article>
           ))}
         </div>
       </section>
