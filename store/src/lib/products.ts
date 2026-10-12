@@ -11,6 +11,13 @@ export type ProductVariant = {
   stock: number;
 };
 
+export type SizeRow = {
+  size: string;
+  chest?: number; // รอบอก (ซม.)
+  length?: number; // ความยาวเสื้อ (ซม.)
+  sleeve?: number; // ความยาวแขน (ซม.)
+};
+
 export type Product = {
   _id: string;
   title: string;
@@ -23,6 +30,7 @@ export type Product = {
   images?: SanityImageSource[];
   imageUrls?: string[]; // รูปแบบ URL ตรง (ใช้กับสินค้าตัวอย่าง/รูป local)
   variants?: ProductVariant[];
+  sizeChart?: SizeRow[];
   featured?: boolean;
 };
 
@@ -47,6 +55,7 @@ const detailFields = `
   description,
   images,
   variants,
+  sizeChart,
   featured
 `;
 

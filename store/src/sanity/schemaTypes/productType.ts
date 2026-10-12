@@ -85,6 +85,33 @@ export const productType = defineType({
       ],
     }),
     defineField({
+      name: "sizeChart",
+      title: "ตารางไซซ์ (ซม.)",
+      description: "วัดแบน (รอบอก = วัดจากรักแร้ถึงรักแร้ × 2)",
+      type: "array",
+      of: [
+        defineArrayMember({
+          type: "object",
+          name: "sizeRow",
+          fields: [
+            defineField({ name: "size", title: "ไซซ์", type: "string" }),
+            defineField({ name: "chest", title: "รอบอก (ซม.)", type: "number" }),
+            defineField({ name: "length", title: "ความยาวเสื้อ (ซม.)", type: "number" }),
+            defineField({ name: "sleeve", title: "ความยาวแขน (ซม.)", type: "number" }),
+          ],
+          preview: {
+            select: { size: "size", chest: "chest", length: "length" },
+            prepare({ size, chest, length }) {
+              return {
+                title: size || "ไซซ์",
+                subtitle: `อก ${chest ?? "-"} · ยาว ${length ?? "-"} ซม.`,
+              };
+            },
+          },
+        }),
+      ],
+    }),
+    defineField({
       name: "featured",
       title: "แสดงเป็นสินค้าเด่นบนหน้าแรก",
       type: "boolean",

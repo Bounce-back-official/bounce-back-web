@@ -4,48 +4,92 @@ import type { Product } from "./products";
  * สินค้าตัวอย่าง (ใช้เมื่อยังไม่มีสินค้าจริงใน Sanity)
  * พอเพิ่มสินค้าใน /studio ระบบจะสลับไปใช้ของจริงอัตโนมัติ
  * รูปอยู่ที่ store/public/products/*
- *   - ls-black / ls-grey / ls-black-front = เสื้อ Long Sleeve จริง (mockup แรก)
+ *   - on-your-track / bounce-arc / grey-halftone = เสื้อ Long Sleeve 3 รุ่นจริง (ภาพชุดใหม่)
  *   - tee / jogger / accessories = รูปตัวอย่าง (ยังไม่มีของจริง)
  */
-const LS_BLACK = "/products/ls-black.jpg";
-const LS_GREY = "/products/ls-grey.jpg";
+const ON_YOUR_TRACK = [
+  "/products/on-your-track-front.jpg",
+  "/products/on-your-track-back.jpg",
+  "/products/on-your-track-worn.jpg",
+  "/products/on-your-track-detail.jpg",
+];
+const BOUNCE_ARC = [
+  "/products/bounce-arc-front.jpg",
+  "/products/bounce-arc-back.jpg",
+  "/products/bounce-arc-worn.jpg",
+  "/products/bounce-arc-detail.jpg",
+];
+const GREY_HALFTONE = [
+  "/products/grey-halftone-front.jpg",
+  "/products/grey-halftone-back.jpg",
+  "/products/grey-halftone-worn.jpg",
+  "/products/grey-halftone-detail.jpg",
+];
 const LS_BLACK_FRONT = "/products/ls-black-front.jpg";
-const JOGGER = "/products/jogger.png";
-const ACC = "/products/accessories.png";
+const JOGGER = "/products/jogger.jpg";
+const ACC = "/products/accessories.jpg";
+
+// ตารางไซซ์เสื้อ Long Sleeve (ซม.) — ตัวอย่าง ปรับตามจริงเมื่อได้สเปก production
+const LS_SIZECHART = [
+  { size: "S", chest: 96, length: 68, sleeve: 60 },
+  { size: "M", chest: 102, length: 70, sleeve: 62 },
+  { size: "L", chest: 108, length: 72, sleeve: 64 },
+  { size: "XL", chest: 114, length: 74, sleeve: 66 },
+];
 
 export const demoProducts: Product[] = [
   {
-    _id: "demo-return-arc-ls",
-    title: "RETURN ARC LONG SLEEVE",
-    slug: "return-arc-long-sleeve",
+    _id: "demo-on-your-track-ls",
+    title: "ON YOUR TRACK LONG SLEEVE",
+    slug: "on-your-track-long-sleeve",
     price: 990,
     category: "เสื้อ",
     featured: true,
-    imageUrls: [LS_BLACK, LS_BLACK_FRONT],
+    imageUrls: ON_YOUR_TRACK,
+    sizeChart: LS_SIZECHART,
     description:
-      "เสื้อแขนยาวออกกำลังกาย เนื้อผ้าเบา ระบายอากาศดี ทรงพอดีตัว โลโก้ Bounce Back ที่อก",
+      "เสื้อแขนยาว performance รุ่น On Your Track เนื้อผ้าเบา ระบายอากาศดี ทรงพอดีตัว พร้อมกราฟิกด้านหลังที่เป็นเอกลักษณ์",
     variants: [
-      { size: "S", color: "Obsidian", sku: "LS-OB-S", stock: 8 },
-      { size: "M", color: "Obsidian", sku: "LS-OB-M", stock: 12 },
-      { size: "L", color: "Obsidian", sku: "LS-OB-L", stock: 6 },
-      { size: "XL", color: "Obsidian", sku: "LS-OB-XL", stock: 4 },
+      { size: "S", color: "Onyx", sku: "TRK-ONX-S", stock: 8 },
+      { size: "M", color: "Onyx", sku: "TRK-ONX-M", stock: 12 },
+      { size: "L", color: "Onyx", sku: "TRK-ONX-L", stock: 6 },
+      { size: "XL", color: "Onyx", sku: "TRK-ONX-XL", stock: 4 },
     ],
   },
   {
-    _id: "demo-reset-longsleeve",
-    title: "RESET LONG SLEEVE",
-    slug: "reset-long-sleeve",
+    _id: "demo-bounce-arc-ls",
+    title: "BOUNCE BACK ARC LONG SLEEVE",
+    slug: "bounce-back-arc-long-sleeve",
     price: 990,
     category: "เสื้อ",
     featured: true,
-    imageUrls: [LS_GREY],
+    imageUrls: BOUNCE_ARC,
+    sizeChart: LS_SIZECHART,
     description:
-      "เสื้อแขนยาวสีเทาอ่อน ใส่สบาย กันแดด UPF50+ เหมาะกับวิ่งเช้า-เย็น",
+      "เสื้อแขนยาวสีดำดีไซน์โลโก้โค้งด้านหลัง ใส่ซ้อม วิ่ง และใช้งานประจำวันได้ในตัวเดียว",
     variants: [
-      { size: "S", color: "Light Grey", sku: "LS-GR-S", stock: 6 },
-      { size: "M", color: "Light Grey", sku: "LS-GR-M", stock: 8 },
-      { size: "L", color: "Light Grey", sku: "LS-GR-L", stock: 6 },
-      { size: "XL", color: "Light Grey", sku: "LS-GR-XL", stock: 0 },
+      { size: "S", color: "Obsidian", sku: "ARC-OB-S", stock: 6 },
+      { size: "M", color: "Obsidian", sku: "ARC-OB-M", stock: 8 },
+      { size: "L", color: "Obsidian", sku: "ARC-OB-L", stock: 6 },
+      { size: "XL", color: "Obsidian", sku: "ARC-OB-XL", stock: 0 },
+    ],
+  },
+  {
+    _id: "demo-grey-halftone-ls",
+    title: "GREY HALFTONE LONG SLEEVE",
+    slug: "grey-halftone-long-sleeve",
+    price: 990,
+    category: "เสื้อ",
+    featured: true,
+    imageUrls: GREY_HALFTONE,
+    sizeChart: LS_SIZECHART,
+    description:
+      "เสื้อแขนยาวสีเทา Halftone น้ำหนักเบา แห้งไว พร้อมกราฟิก Bounce Back ที่สะท้อนการกลับมาในทุกจังหวะ",
+    variants: [
+      { size: "S", color: "Light Grey", sku: "HLF-GR-S", stock: 6 },
+      { size: "M", color: "Light Grey", sku: "HLF-GR-M", stock: 8 },
+      { size: "L", color: "Light Grey", sku: "HLF-GR-L", stock: 6 },
+      { size: "XL", color: "Light Grey", sku: "HLF-GR-XL", stock: 0 },
     ],
   },
   {
@@ -58,9 +102,9 @@ export const demoProducts: Product[] = [
     imageUrls: [JOGGER],
     description: "กางเกงขาสั้น 5 นิ้ว น้ำหนักเบา มีซับใน เคลื่อนไหวคล่องตัว",
     variants: [
-      { size: "S", color: "Graphite", sku: "SHT-GR-S", stock: 10 },
-      { size: "M", color: "Graphite", sku: "SHT-GR-M", stock: 9 },
-      { size: "L", color: "Graphite", sku: "SHT-GR-L", stock: 4 },
+      { size: "S", color: "Graphite", sku: "BB-SHORT-GRA-S", stock: 10 },
+      { size: "M", color: "Graphite", sku: "BB-SHORT-GRA-M", stock: 9 },
+      { size: "L", color: "Graphite", sku: "BB-SHORT-GRA-L", stock: 4 },
     ],
   },
   {
@@ -73,9 +117,9 @@ export const demoProducts: Product[] = [
     imageUrls: [JOGGER],
     description: "กางเกงจ็อกเกอร์ใส่สบายทุกวัน ทรงเรียว มีกระเป๋าซิป",
     variants: [
-      { size: "M", color: "Charcoal", sku: "JOG-CH-M", stock: 7 },
-      { size: "L", color: "Charcoal", sku: "JOG-CH-L", stock: 5 },
-      { size: "XL", color: "Charcoal", sku: "JOG-CH-XL", stock: 3 },
+      { size: "M", color: "Charcoal", sku: "BB-JOGGER-CHR-M", stock: 7 },
+      { size: "L", color: "Charcoal", sku: "BB-JOGGER-CHR-L", stock: 5 },
+      { size: "XL", color: "Charcoal", sku: "BB-JOGGER-CHR-XL", stock: 3 },
     ],
   },
   {
@@ -86,7 +130,7 @@ export const demoProducts: Product[] = [
     category: "อุปกรณ์",
     imageUrls: [ACC],
     description: "เซ็ตอุปกรณ์ออกกำลังกาย ผ้าคาดหัว ผ้าเช็ดตัว และริสแบนด์",
-    variants: [{ size: "Free", color: "Obsidian", sku: "ACC-OB-F", stock: 20 }],
+    variants: [{ size: "Free", color: "Obsidian", sku: "BB-ACC-BLK-F", stock: 20 }],
   },
   {
     _id: "demo-core-tank",
@@ -97,9 +141,9 @@ export const demoProducts: Product[] = [
     imageUrls: [LS_BLACK_FRONT],
     description: "เสื้อกล้ามเนื้อผ้ายืดหยุ่น ระบายเหงื่อไว เหมาะกับเวทเทรนนิ่ง",
     variants: [
-      { size: "S", color: "Obsidian", sku: "TNK-OB-S", stock: 9 },
-      { size: "M", color: "Obsidian", sku: "TNK-OB-M", stock: 11 },
-      { size: "L", color: "Obsidian", sku: "TNK-OB-L", stock: 7 },
+      { size: "S", color: "Obsidian", sku: "BB-TANK-BLK-S", stock: 9 },
+      { size: "M", color: "Obsidian", sku: "BB-TANK-BLK-M", stock: 11 },
+      { size: "L", color: "Obsidian", sku: "BB-TANK-BLK-L", stock: 7 },
     ],
   },
 ];
