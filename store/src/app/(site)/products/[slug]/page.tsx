@@ -1,7 +1,7 @@
-import Image from "next/image";
 import { notFound } from "next/navigation";
 
 import { AddToCart } from "@/components/AddToCart";
+import { ProductGallery } from "@/components/ProductGallery";
 import { formatBaht } from "@/lib/format";
 import { getProduct } from "@/lib/products";
 import { urlFor } from "@/sanity/lib/image";
@@ -48,43 +48,7 @@ export default async function ProductPage({
         }}
       >
         {/* Gallery */}
-        <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-          <div
-            style={{ position: "relative", aspectRatio: "1/1", overflow: "hidden" }}
-            className="product-card__media"
-          >
-            {displayImages[0] ? (
-              <Image
-                src={displayImages[0]}
-                alt={product.title}
-                fill
-                sizes="(max-width: 768px) 100vw, 50vw"
-                priority
-              />
-            ) : (
-              <span className="product-card__mark">B</span>
-            )}
-          </div>
-          {displayImages.length > 1 && (
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(4, 1fr)",
-                gap: "12px",
-              }}
-            >
-              {displayImages.slice(1, 5).map((img, i) => (
-                <div
-                  key={i}
-                  className="product-card__media"
-                  style={{ position: "relative", aspectRatio: "1", overflow: "hidden" }}
-                >
-                  <Image src={img} alt={`${product.title} ${i + 2}`} fill sizes="120px" />
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
+        <ProductGallery images={displayImages} title={product.title} />
 
         {/* Info */}
         <div>

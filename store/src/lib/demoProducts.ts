@@ -25,10 +25,6 @@ const GREY_HALFTONE = [
   "/products/grey-halftone-worn.jpg",
   "/products/grey-halftone-detail.jpg",
 ];
-const LS_BLACK_FRONT = "/products/ls-black-front.jpg";
-const JOGGER = "/products/jogger.jpg";
-const ACC = "/products/accessories.jpg";
-
 // ตารางไซซ์เสื้อ Long Sleeve (ซม.) — ตัวอย่าง ปรับตามจริงเมื่อได้สเปก production
 const LS_SIZECHART = [
   { size: "S", chest: 96, length: 68, sleeve: 60 },
@@ -90,60 +86,6 @@ export const demoProducts: Product[] = [
       { size: "M", color: "Light Grey", sku: "HLF-GR-M", stock: 8 },
       { size: "L", color: "Light Grey", sku: "HLF-GR-L", stock: 6 },
       { size: "XL", color: "Light Grey", sku: "HLF-GR-XL", stock: 0 },
-    ],
-  },
-  {
-    _id: "demo-focus-shorts",
-    title: "FOCUS 5” SHORTS",
-    slug: "focus-5-shorts",
-    price: 1090,
-    category: "กางเกง",
-    featured: true,
-    imageUrls: [JOGGER],
-    description: "กางเกงขาสั้น 5 นิ้ว น้ำหนักเบา มีซับใน เคลื่อนไหวคล่องตัว",
-    variants: [
-      { size: "S", color: "Graphite", sku: "BB-SHORT-GRA-S", stock: 10 },
-      { size: "M", color: "Graphite", sku: "BB-SHORT-GRA-M", stock: 9 },
-      { size: "L", color: "Graphite", sku: "BB-SHORT-GRA-L", stock: 4 },
-    ],
-  },
-  {
-    _id: "demo-adapt-jogger",
-    title: "ADAPT DAILY JOGGER",
-    slug: "adapt-daily-jogger",
-    price: 1490,
-    category: "กางเกง",
-    featured: true,
-    imageUrls: [JOGGER],
-    description: "กางเกงจ็อกเกอร์ใส่สบายทุกวัน ทรงเรียว มีกระเป๋าซิป",
-    variants: [
-      { size: "M", color: "Charcoal", sku: "BB-JOGGER-CHR-M", stock: 7 },
-      { size: "L", color: "Charcoal", sku: "BB-JOGGER-CHR-L", stock: 5 },
-      { size: "XL", color: "Charcoal", sku: "BB-JOGGER-CHR-XL", stock: 3 },
-    ],
-  },
-  {
-    _id: "demo-move-cap",
-    title: "MOVE ACCESSORIES SET",
-    slug: "move-accessories-set",
-    price: 690,
-    category: "อุปกรณ์",
-    imageUrls: [ACC],
-    description: "เซ็ตอุปกรณ์ออกกำลังกาย ผ้าคาดหัว ผ้าเช็ดตัว และริสแบนด์",
-    variants: [{ size: "Free", color: "Obsidian", sku: "BB-ACC-BLK-F", stock: 20 }],
-  },
-  {
-    _id: "demo-core-tank",
-    title: "CORE TANK",
-    slug: "core-tank",
-    price: 790,
-    category: "เสื้อ",
-    imageUrls: [LS_BLACK_FRONT],
-    description: "เสื้อกล้ามเนื้อผ้ายืดหยุ่น ระบายเหงื่อไว เหมาะกับเวทเทรนนิ่ง",
-    variants: [
-      { size: "S", color: "Obsidian", sku: "BB-TANK-BLK-S", stock: 9 },
-      { size: "M", color: "Obsidian", sku: "BB-TANK-BLK-M", stock: 11 },
-      { size: "L", color: "Obsidian", sku: "BB-TANK-BLK-L", stock: 7 },
     ],
   },
 ];
